@@ -58,7 +58,6 @@ struct TexPart
 	FBitmap::Transform Rotate = FBitmap::Transform::NONE;
 	uint8_t op = OP_COPY;
 };
-static_assert(sizeof(TexPart) == 32);
 
 struct TexPartBuild
 {
@@ -71,6 +70,7 @@ struct TexPartBuild
 	uint8_t Rotate = 0;
 	uint8_t op = OP_COPY;
 };
+static_assert(sizeof(TexPart) == sizeof(TexPartBuild));
 
 
 //==========================================================================

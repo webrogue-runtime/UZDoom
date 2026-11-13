@@ -21,6 +21,7 @@
 **
 */
 
+#ifndef __wasi__
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -449,3 +450,4 @@ int cc_install_handlers(int argc, char **argv, int num_signals, int *signals, co
 	}
 	return retval;
 }
+#endif

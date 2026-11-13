@@ -243,7 +243,7 @@ public:
 
 void I_InitSound ()
 {
-	FModule_SetProgDir(progdir.GetChars());
+	zmusic_i_module::FModule_SetProgDir(progdir.GetChars());
 	/* Get command line options: */
 	nosound = !!Args->CheckParm (FArg_nosound);
 	nosfx = !!Args->CheckParm (FArg_nosfx);

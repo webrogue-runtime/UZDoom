@@ -34,7 +34,7 @@
 const char *GetSampleTypeName(SampleType type);
 const char *GetChannelConfigName(ChannelConfig chan);
 
-FModule OpenALModule{"OpenAL"};
+zmusic_i_module::FModule OpenALModule{"OpenAL"};
 
 #include "oalload.h"
 

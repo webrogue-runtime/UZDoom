@@ -457,10 +457,12 @@ fluid_thread_self_set_prio(int prio_level)
         memset(&priority, 0, sizeof(priority));
         priority.sched_priority = prio_level;
 
+#ifndef __wasi__
         if(pthread_setschedparam(pthread_self(), SCHED_FIFO, &priority) == 0)
         {
             return;
         }
+#endif
 
 #ifdef DBUS_SUPPORT
         /* Try to gain high priority via rtkit */

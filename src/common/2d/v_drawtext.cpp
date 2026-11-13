@@ -511,7 +511,7 @@ void DrawDynamicFontText(F2DDrawer *drawer, FFont* originalFont, FFont* substitu
 
 		const double finalRescale = shrinkScale / scaleAdjust;
 
-		for (int i = 0; i < s.TrexGlyphs.size(); ++i)
+		for (size_t i = 0; i < s.TrexGlyphs.size(); ++i)
 		{
 			const Trex::ShapedGlyph &g            = s.TrexGlyphs[i];
 			const double             cx = (cursorx + (g.xOffset * finalRescale*scalex) + (g.info.bearingX*finalRescale*scalex));
@@ -668,8 +668,8 @@ std::u32string ConvertStringToUTF32(const chartype *string)
 	              std::is_same_v<chartype, char8_t>)
 	{
 		utf32String.resize(
-			simdutf::utf32_length_from_utf8((const char *)string, std::char_traits<chartype>::length(string)), '\0');
-		simdutf::convert_utf8_to_utf32((const char *)string, std::char_traits<chartype>::length(string),
+			simdutf::utf32_length_from_utf8((const char *)string, strlen((const char *)string)), '\0');
+		simdutf::convert_utf8_to_utf32((const char *)string, strlen((const char *)string),
 		                               utf32String.data());
 	}
 	else if constexpr (std::is_same_v<chartype, char16_t>)

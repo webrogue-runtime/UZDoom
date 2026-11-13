@@ -392,7 +392,7 @@ DFrameBuffer *SDLVideo::CreateFrameBuffer ()
 				builder.RequireExtension(names[i]);
 			auto instance = builder.Create();
 
-			VkSurfaceKHR surfacehandle = nullptr;
+			VkSurfaceKHR surfacehandle = 0;
 			if (!I_CreateVulkanSurface(instance->Instance, &surfacehandle))
 				VulkanError("I_CreateVulkanSurface failed");
 

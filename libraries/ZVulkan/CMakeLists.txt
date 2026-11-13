@@ -21,7 +21,6 @@ set(ZVULKAN_SOURCES
 	src/vulkanswapchain.cpp
 	src/vk_mem_alloc/vk_mem_alloc.cpp
 	src/vk_mem_alloc/vk_mem_alloc.natvis
-	src/volk/volk.c
 	src/glslang/glslang/MachineIndependent/SymbolTable.h
 	src/glslang/glslang/MachineIndependent/propagateNoContraction.cpp
 	src/glslang/glslang/MachineIndependent/PoolAlloc.cpp
@@ -115,6 +114,10 @@ set(ZVULKAN_SOURCES
 	src/glslang/OGLCompilersDLL/InitializeDll.h
 )
 
+if(NOT WASI)
+	set(ZVULKAN_SOURCES ${ZVULKAN_SOURCES} src/volk/volk.c)
+endif()
+
 set(ZVULKAN_INCLUDES
 	include/zvulkan/vulkanbuilders.h
 	include/zvulkan/vulkancompatibledevice.h
@@ -197,6 +200,8 @@ else()
 	if(APPLE)
 		find_package(Vulkan REQUIRED COMPONENTS MoltenVK)
 		list(APPEND ZVULKAN_LIBS Vulkan::Vulkan)
+	elseif(WASI)
+		list(APPEND ZVULKAN_LIBS vulkan vulkan_virtio wr4c samplerate)
 	elseif(NOT HAIKU AND NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|NetBSD|OpenBSD|DragonFly")
 		list(APPEND ZVULKAN_LIBS ${CMAKE_DL_LIBS} -ldl)
 	else()

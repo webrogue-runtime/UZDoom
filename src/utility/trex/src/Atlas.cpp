@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <map>
 #include <cassert>
+#include <algorithm>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define	STB_IMAGE_WRITE_STATIC

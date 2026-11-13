@@ -1,4 +1,8 @@
+#ifdef __wasi__
+#include <vulkan/vulkan.h>
+#else
 #include "volk/volk.h"
+#endif
 #define VMA_IMPLEMENTATION
 #define VMA_STATIC_VULKAN_FUNCTIONS 1
 

@@ -30,6 +30,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <inttypes.h>
+#include <errno.h>
 
 #include "resourcefile.h"
 #include "fs_filesystem.h"

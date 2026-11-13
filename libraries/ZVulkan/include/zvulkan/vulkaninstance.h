@@ -7,7 +7,11 @@
 #define VK_USE_PLATFORM_METAL_EXT
 #endif
 
+#if defined(__wasi__)
+#include <vulkan/vulkan.h>
+#else
 #include "volk/volk.h"
+#endif
 #include "vk_mem_alloc/vk_mem_alloc.h"
 
 #if defined(_WIN32)

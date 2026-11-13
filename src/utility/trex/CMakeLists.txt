@@ -14,7 +14,14 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT t
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.hpp" "include/*.hpp")
 add_library(trex STATIC ${SOURCES})
 target_include_directories(trex PUBLIC include/)
-target_link_libraries(trex freetype harfbuzz)
+target_link_libraries(trex freetype)
+if(WASI)
+target_link_libraries(trex ${HarfBuzz_LIBRARY})
+target_include_directories(trex PRIVATE ${HarfBuzz_INCLUDE_DIR})
+else()
+target_link_libraries(trex harfbuzz)
+endif()
+
 
 ####################
 ### Dependencies ###

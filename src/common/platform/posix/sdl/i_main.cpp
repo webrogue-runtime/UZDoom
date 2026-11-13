@@ -25,11 +25,15 @@
 // HEADER FILES ------------------------------------------------------------
 
 #include <SDL2/SDL.h>
+#ifndef __wasi__
 #include <csignal>
+#endif
 #include <fcntl.h>
 #include <locale.h>
 #include <new>
+#ifndef __wasi__
 #include <signal.h>
+#endif
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -120,6 +124,7 @@ static int GetCrashInfo (char *buffer, char *end)
 
 FString I_DetectOS()
 {
+#ifndef __wasi__
 	FString operatingSystem;
 
 	const char *paths[] = {"/etc/os-release", "/usr/lib/os-release"};
@@ -167,6 +172,9 @@ FString I_DetectOS()
 		operatingSystem = "Unknown";
 
 	return operatingSystem;
+#else
+	return "Webrogue";
+#endif
 }
 
 void I_StartupJoysticks();
@@ -180,6 +188,7 @@ void I_StartupJoysticks();
 
 int main (int argc, char **argv)
 {
+#if !defined(__wasi__)
 #if !defined (__APPLE__)
 	{
 		int s[4] = { SIGSEGV, SIGILL, SIGFPE, SIGBUS };
@@ -196,6 +205,7 @@ int main (int argc, char **argv)
 	// Set LC_NUMERIC environment variable in case some library decides to
 	// clear the setlocale call at least this will be correct.
 	// Note that the LANG environment variable is overridden by LC_*
+#endif
 	setenv ("LC_NUMERIC", "C", 1);
 
 	setlocale (LC_ALL, "C");

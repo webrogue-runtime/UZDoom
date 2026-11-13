@@ -22,7 +22,7 @@
 **
 */
 
-#ifndef _WIN32
+#if !defined(_WIN32) && !defined(__wasi__)
 #include <sys/types.h>
 #include <sys/wait.h>
 #endif

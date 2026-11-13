@@ -93,9 +93,11 @@ VersionInfo GetCurrentVersionForUpdater()
 {
 	static VersionInfo version = ([]() {
 		VersionInfo v = VersionInfo{GIT_DESCRIPTION};
+#ifndef __wasi__
 		assert(v.major == VER_MAJOR);
 		assert(v.minor == VER_MINOR);
 		assert(v.revision == VER_REVISION);
+#endif
 		DEBUG_LOG("%d|%d|%d|%s|%s", v.major, v.minor, v.revision, v.prerelease, v.build);
 		return v;
 	})();

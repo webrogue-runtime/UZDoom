@@ -30,7 +30,9 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdarg.h>
+#ifndef __wasi__
 #include <signal.h>
+#endif
 #if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__)
 #include <malloc.h>
 #endif

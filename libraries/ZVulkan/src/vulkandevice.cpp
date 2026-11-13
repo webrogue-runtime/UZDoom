@@ -129,7 +129,9 @@ void VulkanDevice::CreateDevice()
 	VkResult result = vkCreateDevice(PhysicalDevice.Device, &deviceCreateInfo, nullptr, &device);
 	CheckVulkanError(result, "Could not create vulkan device");
 
+#ifndef __wasi__
 	volkLoadDevice(device);
+#endif
 
 	if (GraphicsFamily != -1)
 		vkGetDeviceQueue(device, GraphicsFamily, 0, &GraphicsQueue);

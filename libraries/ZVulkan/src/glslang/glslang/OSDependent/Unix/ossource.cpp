@@ -46,7 +46,7 @@
 #include <cstdio>
 #include <sys/time.h>
 
-#if !defined(__Fuchsia__)
+#if !defined(__Fuchsia__) && !defined(__wasi__)
 #include <sys/resource.h>
 #endif
 

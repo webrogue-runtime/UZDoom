@@ -32,7 +32,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
+#ifndef __wasi__
 #include <sys/wait.h>
+#endif
 #include <time.h>
 #include <unistd.h>
 
@@ -76,6 +78,7 @@ void I_SetIWADInfo()
 
 extern "C" int I_FileAvailable(const char* filename)
 {
+#ifndef __wasi__
 	FString cmd = "which {0} >/dev/null 2>&1";
 	cmd.Substitute("{0}", filename);
 
@@ -84,6 +87,7 @@ extern "C" int I_FileAvailable(const char* filename)
 		int status = pclose(f);
 		return WIFEXITED(status) && WEXITSTATUS(status) == 0;
 	}
+#endif
 
 	return 0;
 }
@@ -200,11 +204,13 @@ void CalculateCPUSpeed()
 
 void CleanProgressBar()
 {
+#ifndef __wasi__
 	if (!isatty(STDOUT_FILENO)) return;
 	struct winsize sizeOfWindow;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &sizeOfWindow);
 	fprintf(stdout,"\0337\033[%d;%dH\033[0J\0338",sizeOfWindow.ws_row, 0);
 	fflush(stdout);
+#endif
 }
 
 static int ProgressBarCurPos, ProgressBarMaxPos;
@@ -212,6 +218,7 @@ static bool ProgressBarComplete;
 
 void RedrawProgressBar(int CurPos, int MaxPos)
 {
+#ifndef __wasi__
 	if (!isatty(STDOUT_FILENO)) return;
 
 	if (ProgressBarComplete && CurPos >= MaxPos) return;
@@ -238,6 +245,7 @@ void RedrawProgressBar(int CurPos, int MaxPos)
 	fflush(stdout);
 	ProgressBarCurPos = CurPos;
 	ProgressBarMaxPos = MaxPos;
+#endif
 }
 
 void I_PrintStr(const char *cp)
@@ -420,7 +428,7 @@ void I_OpenShellFolder(const char* infolder)
 
 #ifdef __HAIKU__
 		std::system("open .");
-#else
+#elif !defined(__wasi__)
 		std::system("xdg-open .");
 #endif
 

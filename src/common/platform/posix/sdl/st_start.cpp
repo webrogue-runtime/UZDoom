@@ -24,10 +24,14 @@
 
 // HEADER FILES ------------------------------------------------------------
 
+#ifndef __wasi__
 #include <csignal>
+#endif
 #include <stdio.h>
 #include <sys/time.h>
+#ifndef __wasi__
 #include <termios.h>
+#endif
 #include <unistd.h>
 
 #include "basics.h"
@@ -49,14 +53,18 @@ class FTTYStartupScreen : public FStartupScreen
 		bool DidNetInit;
 		int NetMaxPos, NetCurPos;
 		const char *TheNetMessage;
+#ifndef __wasi__
 		termios OldTermIOS;
+#endif
 };
 
 // EXTERNAL FUNCTION PROTOTYPES --------------------------------------------
 
 extern void RedrawProgressBar(int CurPos, int MaxPos);
 extern void CleanProgressBar();
+#ifndef __wasi__
 extern volatile sig_atomic_t gameloop_abort;
+#endif
 
 // PRIVATE DATA DEFINITIONS ------------------------------------------------
 

@@ -54,6 +54,7 @@
  * point, but this is just a first order sanity check.
  */
 
+namespace zmusic_i_module {
 class FModule;
 class FStaticModule;
 
@@ -231,3 +232,4 @@ public:
 
 void FModule_SetProgDir(const char* progdir);
 const std::string& FModule_GetProgDir();
+}

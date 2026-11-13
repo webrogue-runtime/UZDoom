@@ -49,8 +49,9 @@ else()
 	# the parent project doesn't provide them.
 
 	if(NOT DEFINED BUILD_SHARED_LIBS)
-		set(BUILD_SHARED_LIBS ON)
+		option(ZMUSIC_BUILD_SHARED_LIBS "Build ZMusic shared libraries" ON)
 	endif()
+	set(BUILD_SHARED_LIBS ${ZMUSIC_BUILD_SHARED_LIBS})
 
 	# Although install rules can be avoided with EXCLUDE_FROM_ALL on
 	# add_subdirectory, the EXPORT rules may place certain usage requirements on

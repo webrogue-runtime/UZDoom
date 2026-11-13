@@ -48,6 +48,7 @@
 using HMODULE = void*;
 #endif
 
+namespace zmusic_i_module {
 bool FModule::Load(std::initializer_list<const char*> libnames)
 {
 	for(auto lib : libnames)
@@ -110,4 +111,5 @@ void FModule_SetProgDir(const char* progdir)
 const std::string& FModule_GetProgDir()
 {
     return module_progdir;
+}
 }

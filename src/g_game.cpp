@@ -2553,6 +2553,7 @@ void G_DoSaveGame (bool okForQuicksave, bool forceQuicksave, FString filename, c
 
 	bool succeeded = false;
 
+	printf("aa: %s\n", filename.GetChars());
 	if (WriteZip(filename.GetChars(), savegame_content.Data(), savegame_content.Size()))
 	{
 		// Check whether the file is ok by trying to open it.

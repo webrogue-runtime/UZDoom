@@ -28,10 +28,14 @@
 #include "colorspace.h"
 #include "v_video.h"
 #include "fs_filesystem.h"
+#ifndef __wasi__
 #include <csignal>
+#endif
 
 extern bool		advancedemo;
+#ifndef __wasi__
 extern volatile sig_atomic_t gameloop_abort;
+#endif
 EXTERN_CVAR(Bool, hud_toggled);
 void D_ToggleHud();
 

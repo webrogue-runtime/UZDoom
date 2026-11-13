@@ -544,7 +544,9 @@ FString lastIWAD;
 int restart = 0;
 extern bool AppActive;
 bool playedtitlemusic;
+#ifndef __wasi__
 volatile sig_atomic_t gameloop_abort = false;
+#endif
 
 FStartScreen* StartScreen;
 std::unique_ptr<DebugServer::DebugServer> debugServer;
@@ -1627,10 +1629,12 @@ void D_DoomLoop ()
 			D_Display ();
 			S_UpdateMusic();
 
+#ifndef __wasi__
 			if (gameloop_abort)
 			{
 				C_DoCommand("quickexit");
 			}
+#endif
 
 			if (wantToRestart)
 			{
@@ -4366,6 +4370,7 @@ static int D_DoomMain_Internal (void)
 
 void SignalHandler(int signal)
 {
+#ifndef __wasi__
 	if (gameloop_abort)
 	{
 		Printf("Received signal %d, exiting\n", signal);
@@ -4376,6 +4381,9 @@ void SignalHandler(int signal)
 		Printf("Received signal %d, shutting down\n", signal);
 		gameloop_abort = true;
 	}
+#else
+	abort();
+#endif
 }
 
 int GameMain()

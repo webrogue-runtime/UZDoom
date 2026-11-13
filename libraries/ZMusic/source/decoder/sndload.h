@@ -5,7 +5,7 @@
 
 #if defined HAVE_SNDFILE && defined DYN_SNDFILE
 
-#define DEFINE_ENTRY(type, name) static TReqProc<SndFileModule, type> p_##name{#name};
+#define DEFINE_ENTRY(type, name) static zmusic_i_module::TReqProc<SndFileModule, type> p_##name{#name};
 DEFINE_ENTRY(const char* (*)(SNDFILE* sndfile), sf_strerror)
 DEFINE_ENTRY(int (*)(SNDFILE *sndfile), sf_close)
 DEFINE_ENTRY(SNDFILE* (*)(SF_VIRTUAL_IO *sfvirtual, int mode, SF_INFO *sfinfo, void *user_data), sf_open_virtual)

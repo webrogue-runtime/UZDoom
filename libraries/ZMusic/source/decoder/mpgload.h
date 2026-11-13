@@ -3,7 +3,7 @@
 
 #if defined HAVE_MPG123 && defined DYN_MPG123
 
-#define DEFINE_ENTRY(type, name) static TReqProc<MPG123Module, type> p_##name{#name};
+#define DEFINE_ENTRY(type, name) static zmusic_i_module::TReqProc<MPG123Module, type> p_##name{#name};
 DEFINE_ENTRY(int (*)(mpg123_handle *mh), mpg123_close)
 DEFINE_ENTRY(void (*)(mpg123_handle *mh), mpg123_delete)
 DEFINE_ENTRY(int (*)(void), mpg123_init)

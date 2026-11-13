@@ -28,6 +28,7 @@
 // HEADER FILES ------------------------------------------------------------
 
 #include <float.h>
+#include <cmath>
 
 #include "a_dynlight.h"
 #include "a_keys.h"

@@ -182,6 +182,13 @@ bool WriteZip(const char* filename, const FCompressedBuffer* content, size_t con
 
 	TArray<int> positions;
 
+	std::string dirname = filename;
+	size_t pos = dirname.rfind('/');
+    if (pos != std::string::npos) {
+        dirname.erase(pos);
+    }
+
+	CreatePath(dirname.c_str());
 	auto f = FileWriter::Open(filename);
 	if (f != nullptr)
 	{

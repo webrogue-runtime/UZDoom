@@ -40,6 +40,7 @@ void VulkanInstance::ReleaseResources()
 
 void VulkanInstance::InitVolk()
 {
+#ifndef __wasi__
 	if (volkInitialize() != VK_SUCCESS)
 	{
 		VulkanError("Unable to find Vulkan");
@@ -49,6 +50,7 @@ void VulkanInstance::InitVolk()
 	{
 		VulkanError("Vulkan not supported");
 	}
+#endif
 }
 
 void VulkanInstance::CreateInstance()
@@ -119,7 +121,9 @@ void VulkanInstance::CreateInstance()
 	}
 	CheckVulkanError(result, "Could not create vulkan instance");
 
+#ifndef __wasi__
 	volkLoadInstance(Instance);
+#endif
 
 	if (debugLayerFound)
 	{

@@ -24,6 +24,7 @@
 
 
 #include <sys/stat.h>
+#include <errno.h>
 
 #include "resourcefile.h"
 #include "fs_findfile.h"

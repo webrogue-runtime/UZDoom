@@ -35,7 +35,9 @@
 #include <time.h>
 
 #ifndef _WIN32
+#ifndef __wasi__
 #include <pwd.h>
+#endif
 #include <unistd.h>
 #endif
 
@@ -907,7 +909,7 @@ FString ExpandEnvVars(const char *searchpathstring)
 FString _NicePath(FString path)
 {
 	if (path.IsEmpty()) return ".";
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__wasi__)
 	return ExpandEnvVars(path.GetChars());
 #else
 	if (path.Front() != '~')

@@ -23,7 +23,9 @@
 */
 
 #include <SDL2/SDL.h>
+#ifndef __wasi__
 #include <signal.h>
+#endif
 
 #include "c_console.h"
 #include "c_dispatch.h"

@@ -142,11 +142,13 @@ class dap::Socket::Shared : public dap::ReaderWriter {
     // reconnection issues on the same port.
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char*)&enable, sizeof(enable));
 
+#if !defined(__wasi__)
     struct {
       int l_onoff;  /* linger active */
       int l_linger; /* how many seconds to linger for */
     } linger = {false, 0};
     setsockopt(s, SOL_SOCKET, SO_LINGER, (char*)&linger, sizeof(linger));
+#endif
 #endif  // !defined(_WIN32)
 
     // Enable TCP_NODELAY.

@@ -37,7 +37,7 @@
 
 #ifdef HAVE_SNDFILE
 
-FModule SndFileModule{"SndFile"};
+zmusic_i_module::FModule SndFileModule{"SndFile"};
 
 #include "sndload.h"
 
@@ -63,7 +63,7 @@ extern "C" int IsSndFilePresent()
 		done = true;
         for (auto libname : libnames)
         {
-            auto abspath = FModule_GetProgDir() + "/" + libname;
+            auto abspath = zmusic_i_module::FModule_GetProgDir() + "/" + libname;
             cached_result = SndFileModule.Load({ abspath.c_str(), libname });
             if (cached_result) break;
         }

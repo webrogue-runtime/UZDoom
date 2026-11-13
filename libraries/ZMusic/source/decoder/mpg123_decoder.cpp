@@ -39,7 +39,7 @@
 #ifdef HAVE_MPG123
 
 
-FModule MPG123Module{"MPG123"};
+zmusic_i_module::FModule MPG123Module{"MPG123"};
 
 #include "mpgload.h"
 
@@ -62,7 +62,7 @@ bool IsMPG123Present()
 	if (!done)
 	{
 		done = true;
-		auto abspath = FModule_GetProgDir() + "/" MPG123LIB;
+		auto abspath = zmusic_i_module::FModule_GetProgDir() + "/" MPG123LIB;
 		cached_result = MPG123Module.Load({abspath.c_str(), MPG123LIB});
 	}
 	return cached_result;

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <atomic>
 #include <mutex>
+#include <cmath>
 #include <SDL2/SDL_vulkan.h>
 #include <SDL2/SDL_hints.h>
 
